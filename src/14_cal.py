@@ -32,18 +32,26 @@ import calendar
 from datetime import datetime
 
 def displayCal():
-  arglen = len(sys.argv)
+  args = sys.argv
+  arglen = len(args)
   cal = calendar.TextCalendar()
   
   if arglen == 1:
     m = datetime.today().month
     y = datetime.today().year
   elif arglen == 2:
-    m = int(sys.argv[1])
-    y = datetime.today().year
+    if len(args[1]) <= 2:
+      m = int(args[1])
+      y = datetime.today().year
+    elif len(args[1]) == 4:
+      m = datetime.today().month
+      y = int(args[1])
+    else: 
+      print("Enter valid month or year")
+      sys.exit(1)
   elif arglen == 3:
-    m = int(sys.argv[1])
-    y = int(sys.argv[2])
+    m = int(args[1])
+    y = int(args[2])
   else:
     print("Expecting input of: [month] [year]")
     sys.exit(1)
